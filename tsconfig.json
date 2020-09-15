@@ -7,11 +7,12 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "outDir": "lib",
+    "outDir": "out",
     "preserveConstEnums": true,
     "removeComments": false,
     "sourceMap": true,
     "target": "ES2020",
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ]

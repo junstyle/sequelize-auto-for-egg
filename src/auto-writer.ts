@@ -1,4 +1,5 @@
-import fsp from "fs/promises";
+import fs from "fs";
+import util from "util";
 import _ from "lodash";
 import path from "path";
 import { qNameSplit, recase } from "./types";
@@ -44,7 +45,8 @@ export class AutoWriter {
     const fileName = recase(this.options.caseFile, tableName);
     const filePath = path.join(this.options.directory, fileName + (this.options.typescript ? '.ts' : '.js'));
 
-    return fsp.writeFile(path.resolve(filePath), this.tableText[table]);
+    const writeFile = util.promisify(fs.writeFile);
+    return writeFile(path.resolve(filePath), this.tableText[table]);
 
   }
 }

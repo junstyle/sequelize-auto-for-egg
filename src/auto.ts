@@ -2,9 +2,12 @@
 import _ from "lodash";
 import { Sequelize } from "sequelize";
 import { AutoBuilder } from "./auto-builder";
+import { AutoGenerator } from "./auto-generator";
+import { AutoWriter } from "./auto-writer";
+import { dialects } from "./dialects";
 import { TableData } from "./types";
 
-class AutoSequelize {
+export class AutoSequelize {
   sequelize: Sequelize;
   options: any;
 
@@ -42,6 +45,12 @@ class AutoSequelize {
 
   }
 
+  async run() {
+    const td = await this.build();
+    const tt = this.generate(td);
+    await this.write(tt);
+  }
+
   build(): Promise<TableData> {
     const builder = new AutoBuilder(this.sequelize, this.options.tables, this.options.skipTables, this.options.schema);
     return builder.build().then(tableData => {
@@ -50,5 +59,16 @@ class AutoSequelize {
       }
       return tableData;
     });
+  }
+
+  generate(tableData: TableData) {
+    const dialect = dialects[this.sequelize.getDialect()];
+    const generator = new AutoGenerator(tableData, dialect, this.options);
+    return generator.generateText();
+  }
+
+  write(tableText: { [name: string]: string }) {
+    const writer = new AutoWriter(tableText, this.options);
+    return writer.write();
   }
 }

@@ -89,7 +89,7 @@ export const postgresOptions: DialectOptions = {
   isSerialKey: (record: FKRow) => {
     return (
       _.isObject(record) &&
-      exports.postgres.isPrimaryKey(record) &&
+      postgresOptions.isPrimaryKey(record) &&
       (_.has(record, 'extra') &&
         _.startsWith(record.extra, 'nextval') &&
         _.includes(record.extra, '_seq') &&

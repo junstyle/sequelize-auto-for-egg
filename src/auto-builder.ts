@@ -30,9 +30,9 @@ export class AutoBuilder {
       return this.sequelize.query(showTablesSql, {
         raw: true,
         type: QueryTypes.SELECT
-      }).then(this.processTables);
+      }).then(tr => this.processTables(tr));
     } else {
-      return this.queryInterface.showAllTables().then(this.processTables);
+      return this.queryInterface.showAllTables().then(tr => this.processTables(tr));
     }
 
   }

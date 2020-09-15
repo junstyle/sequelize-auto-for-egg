@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const sequelizeAuto = require('../');
+const AutoSequelize = require('../').AutoSequelize;
 const path = require('path');
 
 const argv = require('yargs')
@@ -101,11 +101,8 @@ function getDefaultPort(dialect) {
   }
 }
 
-const auto = new sequelizeAuto(argv.d, argv.u, !!argv.x ? '' + argv.x : null, configFile);
+const auto = new AutoSequelize(argv.d, argv.u, !!argv.x ? '' + argv.x : null, configFile);
 
-auto.run(function(err) {
-  if (err) {
-    throw err;
-  }
-  console.log('Done!');
+auto.run().then(() => {
+  console.log("Done!");
 });

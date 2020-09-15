@@ -88,7 +88,7 @@ export const mssqlOptions: DialectOptions = {
    */
   isSerialKey: (record: FKRow) => {
     return (
-      _.isObject(record) && exports.mssql.isPrimaryKey(record) && (_.has(record, 'is_identity') && record.is_identity)
+      _.isObject(record) && mssqlOptions.isPrimaryKey(record) && (_.has(record, 'is_identity') && record.is_identity)
     );
   },
   /**

@@ -37,13 +37,13 @@
     ]
   },
   "scripts": {
+    "tsc": "tsc",
     "test": "cross-env DEBUG='sequelize-auto:*' nyc mocha",
     "test-postgres": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres nyc mocha",
     "test-postgres-native": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres-native nyc mocha",
     "test-mysql": "cross-env DEBUG='sequelize-auto:*' DIALECT=mysql nyc mocha",
     "test-sqlite": "cross-env DEBUG='sequelize-auto:*' DIALECT=sqlite nyc mocha",
     "test-mssql": "cross-env DEBUG='sequelize-auto:*' DIALECT=mssql nyc mocha",
-    "deploy": "np",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {

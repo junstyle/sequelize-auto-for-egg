@@ -59,6 +59,8 @@ export class AutoGenerator {
     tableNames.forEach(table => {
       text[table] = this.addTable(table, header, spaces);
     });
+
+    return text;
   }
 
   // Create a string for the model of the table
