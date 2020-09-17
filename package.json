@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-auto",
+  "name": "sequelize-auto-for-egg",
   "version": "0.5.4",
   "publishConfig": {
     "tag": "latest"
