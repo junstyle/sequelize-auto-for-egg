@@ -22,7 +22,7 @@
     "*.md"
   ],
   "bin": {
-    "sequelize-auto": "bin/sequelize-auto"
+    "sequelize-auto": "bin/sequelize-auto-for-egg"
   },
   "repository": {
     "type": "git",
