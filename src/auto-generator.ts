@@ -1,4 +1,4 @@
-import { Table, TableData, recase, qNameSplit } from "./types";
+import { Table, TableData, recase, qNameSplit, CaseOption, AutoOptions } from "./types";
 import _ from "lodash";
 import { DialectOptions } from "./dialect-options";
 
@@ -13,13 +13,13 @@ export class AutoGenerator {
     typescript: boolean;
     es6: boolean;
     esm: boolean;
-    caseModel: string;
-    caseProp: string;
+    caseModel: CaseOption;
+    caseProp: CaseOption;
     additional: any;
     schema: string;
   }
 
-  constructor(tableData: TableData, dialect: DialectOptions, options: any) {
+  constructor(tableData: TableData, dialect: DialectOptions, options: AutoOptions) {
     this.tables = tableData.tables;
     this.foreignKeys = tableData.foreignKeys;
     this.hasTriggerTables = tableData.hasTriggerTables;

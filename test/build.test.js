@@ -5,7 +5,7 @@ var helpers = require('./helpers');
 var dialect = helpers.getTestDialect();
 var testConfig = require('./config');
 var _ = require('lodash');
-const AutoSequelize = require('../out/auto').AutoSequelize;
+const SequelizeAuto = require('../');
 
 describe(helpers.getTestDialectTeaser("sequelize-auto build"), function() {
   var self = this;
@@ -32,9 +32,9 @@ describe(helpers.getTestDialectTeaser("sequelize-auto build"), function() {
       caseProp: isSnakeTables ? 'p' : undefined 
     }, testConfig[helpers.getTestDialect()], self.sequelize.config);
 
-    var autoSequelize = new AutoSequelize(self.sequelize.config.database, self.sequelize.config.username, self.sequelize.config.password, options);
+    var auto = new SequelizeAuto(self.sequelize.config.database, self.sequelize.config.username, self.sequelize.config.password, options);
 
-    autoSequelize.build().then(tableData => {
+    auto.build().then(tableData => {
       callback(tableData);
     }).finally(() => {
       done();

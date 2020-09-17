@@ -2,7 +2,7 @@ const {describe, it} = require('mocha');
 const chai = require('chai');
 const expect = chai.expect;
 const helpers = require('./helpers');
-const dialects = require('../out/dialects').dialects;
+const dialects = require('../lib/dialects').dialects;
 const _ = require('lodash');
 
 describe(helpers.getTestDialectTeaser('sequelize-auto dialects'), function() {

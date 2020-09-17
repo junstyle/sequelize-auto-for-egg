@@ -25,8 +25,34 @@ export function qNameSplit(qname: string) {
   return [null, qname];
 }
 
+export type DialectName = 'mssql'|'mysql'|'mariadb'|'postgres'|'sqlite';
+
+export type CaseOption = 'c'|'l'|'o'|'p'|'u';
+
+export interface AutoOptions {
+  additional: any;
+  caseFile: CaseOption;
+  caseModel: CaseOption;
+  caseProp: CaseOption;
+  closeConnectionAutomatically: boolean;
+  dialect: DialectName;
+  dialectOptions: { options: any };
+  directory: string;
+  es6: boolean;
+  esm: boolean;
+  freezeTableName: boolean;
+  indentation: number;
+  noWrite: boolean;
+  schema: string;
+  skipTables: string[];
+  spaces: boolean;
+  storage: string;
+  tables: string[];
+  typescript: boolean;
+}
+
 /** Change casing of val string according to opt [c|l|o|p|u]  */
-export function recase(opt: string, val: string | null) {
+export function recase(opt: CaseOption, val: string | null) {
   if (!opt || opt === 'o' || !val) {
     return val || ''; // original 
   }

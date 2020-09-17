@@ -2,22 +2,27 @@ import fs from "fs";
 import util from "util";
 import _ from "lodash";
 import path from "path";
-import { qNameSplit, recase } from "./types";
+import { AutoOptions, CaseOption, qNameSplit, recase } from "./types";
 const mkdirp = require('mkdirp');
 
 export class AutoWriter {
   tableText: { [name: string]: string };
   options: {
-    caseFile: string;
+    caseFile: CaseOption;
     directory: string;
     typescript: boolean;
+    noWrite: boolean;
   };
-  constructor(tableText: { [name: string]: string }, options: any) {
+  constructor(tableText: { [name: string]: string }, options: AutoOptions) {
     this.tableText = tableText;
     this.options = options;
   }
 
   write() {
+
+    if (this.options.noWrite) {
+      return Promise.resolve();
+    }
 
     mkdirp.sync(path.resolve(this.options.directory));
 

@@ -5,15 +5,15 @@ import { AutoBuilder } from "./auto-builder";
 import { AutoGenerator } from "./auto-generator";
 import { AutoWriter } from "./auto-writer";
 import { dialects } from "./dialects";
-import { TableData } from "./types";
+import { AutoOptions, DialectName, TableData } from "./types";
 
-export class AutoSequelize {
+export class SequelizeAuto {
   sequelize: Sequelize;
-  options: any;
+  options: AutoOptions;
 
-  constructor(database: string | Sequelize, username: string, password: string, options: any) {
-    if (options && options.dialect === 'sqlite' && !options.storage) {
-      options.storage = database;
+  constructor(database: string | Sequelize, username: string, password: string, options: AutoOptions) {
+    if (options && options.dialect === 'sqlite' && !options.storage && database) {
+      options.storage = database as string;
     }
     if (options && options.dialect === 'mssql') {
       // set defaults for tedious, to silence the warnings
@@ -32,8 +32,6 @@ export class AutoSequelize {
 
 
     this.options = _.extend({
-      global: 'Sequelize',
-      local: 'sequelize',
       spaces: false,
       indentation: 1,
       directory: './models',
@@ -49,6 +47,7 @@ export class AutoSequelize {
     const td = await this.build();
     const tt = this.generate(td);
     await this.write(tt);
+    return td;
   }
 
   build(): Promise<TableData> {
@@ -62,7 +61,7 @@ export class AutoSequelize {
   }
 
   generate(tableData: TableData) {
-    const dialect = dialects[this.sequelize.getDialect()];
+    const dialect = dialects[this.sequelize.getDialect() as DialectName];
     const generator = new AutoGenerator(tableData, dialect, this.options);
     return generator.generateText();
   }
@@ -72,3 +71,5 @@ export class AutoSequelize {
     return writer.write();
   }
 }
+
+module.exports = SequelizeAuto;

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const AutoSequelize = require('../').AutoSequelize;
+const SequelizeAuto = require('../');
 const path = require('path');
 
 const argv = require('yargs')
@@ -87,6 +87,7 @@ configFile.esm = (lang === 'esm');
 configFile.caseModel = argv.cm || configFile.caseModel || 'o';
 configFile.caseFile = argv.cf || configFile.caseFile || 'o';
 configFile.caseProp = argv.cp || configFile.caseProp || 'o';
+configFile.noWrite = argv.n || configFile.noWrite || false;
 
 console.log(configFile);
 
@@ -101,7 +102,7 @@ function getDefaultPort(dialect) {
   }
 }
 
-const auto = new AutoSequelize(argv.d, argv.u, !!argv.x ? '' + argv.x : null, configFile);
+const auto = new SequelizeAuto(argv.d, argv.u, !!argv.x ? '' + argv.x : null, configFile);
 
 auto.run().then(() => {
   console.log("Done!");

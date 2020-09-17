@@ -38,6 +38,7 @@
   },
   "scripts": {
     "tsc": "tsc",
+    "clean": "rimraf lib && rimraf types && rimraf models && rimraf *.tgz",
     "test": "cross-env DEBUG='sequelize-auto:*' nyc mocha",
     "test-postgres": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres nyc mocha",
     "test-postgres-native": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres-native nyc mocha",
@@ -76,6 +77,7 @@
     "nyc": "^15.1.0",
     "pg": "^8.3.3",
     "pg-hstore": "^2.3.3",
+    "rimraf": "^3.0.2",
     "sequelize": "^6.3.5",
     "sqlite3": "^4.2.0",
     "tedious": "^9.2.1",

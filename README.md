@@ -147,15 +147,14 @@ For the `-c, --config` option, various JSON/configuration parameters are defined
 ## Programmatic API
 
 ```js
-var SequelizeAuto = require('sequelize-auto')
+var SequelizeAuto = require('sequelize-auto');
 var auto = new SequelizeAuto('database', 'user', 'pass');
 
-auto.run(function (err) {
-  if (err) throw err;
-
-  console.log(auto.tables); // table list
-  console.log(auto.foreignKeys); // foreign key list
+auto.run().then(data => {
+  console.log(data.tables);      // table list
+  console.log(data.foreignKeys); // foreign key list
 });
+
 
 With options:
 var auto = new SequelizeAuto('database', 'user', 'pass', {
