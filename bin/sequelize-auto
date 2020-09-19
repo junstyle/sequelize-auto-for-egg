@@ -47,13 +47,14 @@ const argv = require('yargs')
   .describe('n', 'Prevent writing the models to disk.')
   .describe('s', 'Database schema from which to retrieve tables')
   .describe('l', 'Language for Model output: es5|es6|esm|ts \n es5 = ES5 CJS modules (default) \n es6 = ES6 CJS modules \n esm = ES6 ESM modules \n ts = TypeScript ')
+  .describe('i', 'indent').number('i')
   .argv;
 
 const dir = !argv.n && (argv.o || path.resolve(process.cwd() + '/models'));
 
 let configFile = {
   spaces: true,
-  indentation: 2
+  indentation: parseInt(argv.i || 2)
 };
 
 if (argv.c) {
