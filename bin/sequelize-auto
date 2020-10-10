@@ -91,7 +91,7 @@ configFile.esm = (lang === 'esm');
 configFile.caseModel = argv.cm || configFile.caseModel || 'o';
 configFile.caseFile = argv.cf || configFile.caseFile || 'o';
 configFile.caseProp = argv.cp || configFile.caseProp || 'o';
-configFile.noDTs = argv.N;
+configFile.noDTs = argv.N || false;
 
 console.log(configFile);
 
