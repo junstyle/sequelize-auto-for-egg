@@ -24,6 +24,8 @@ const argv = require('yargs')
   .alias('n', 'no-write').boolean('n')
   .alias('s', 'schema').string('s')
   .alias('l', 'lang').string('l')
+  .alias('i', 'indent').number('i')
+  .alias('nd', 'no-d-ts').boolean('nd')
   .describe('h', 'IP/Hostname for the database.')
   .describe('d', 'Database name.')
   .describe('u', 'Username for database.')
@@ -47,7 +49,8 @@ const argv = require('yargs')
   .describe('n', 'Prevent writing the models to disk.')
   .describe('s', 'Database schema from which to retrieve tables')
   .describe('l', 'Language for Model output: es5|es6|esm|ts \n es5 = ES5 CJS modules (default) \n es6 = ES6 CJS modules \n esm = ES6 ESM modules \n ts = TypeScript ')
-  .describe('i', 'indent').number('i')
+  .describe('i', 'indent of formatting')
+  .describe('nd', 'Prevent writing the db.d.ts to disk')
   .argv;
 
 const dir = !argv.n && (argv.o || path.resolve(process.cwd() + '/models'));
@@ -88,6 +91,7 @@ configFile.esm = (lang === 'esm');
 configFile.caseModel = argv.cm || configFile.caseModel || 'o';
 configFile.caseFile = argv.cf || configFile.caseFile || 'o';
 configFile.caseProp = argv.cp || configFile.caseProp || 'o';
+configFile.noDTs = argv.nd;
 
 console.log(configFile);
 
